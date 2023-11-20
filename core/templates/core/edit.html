@@ -1,0 +1,20 @@
+{% extends './base.html' %}
+
+{% block title %} Create blog {% endblock %}
+
+
+{% block content %}
+{% if post.owner == user %}
+<h1>Update blog ....</h1>
+<div class="form-group">
+<form method="post">
+    {% csrf_token %}
+    {{form.media}}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-secondary">Update</button>
+</form>
+</div>
+{% else %}
+<h3>You are not allow here...</h3>
+{% endif %}
+{% endblock %}

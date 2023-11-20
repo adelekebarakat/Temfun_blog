@@ -1,0 +1,363 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block title %}Home {% endblock %}
+
+
+{% block content %}
+
+<!-- Hero section -->
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <div class="p-4">
+                <div class="text-start hero-text mt-lg-5">
+                    <h1>Our blog and Insights</h1>
+                    <p>Unlock the secrets of productivity with our latest blog post! Dive into practical tips and expert insights to boost your efficiency and achieve your goals. Don't miss out!</p>
+                </div>
+                <div class="mt-lg-4">
+                    <button class="btn btn-lg readblog-btn">Read Blog</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <div class="p-4">
+                <div class="">
+                    <img src="{% static 'image/hero-blog.png' %}" alt="blog-image" class="img-fluid">
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <div class="me-auto"></div>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all" type="button" role="tab" aria-controls="pills-all" aria-selected="true">All</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-Programming-tab" data-bs-toggle="pill" data-bs-target="#pills-Programming" type="button" role="tab" aria-controls="pills-Programming" aria-selected="false">Programming</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-science-tab" data-bs-toggle="pill" data-bs-target="#pills-science" type="button" role="tab" aria-controls="pills-science" aria-selected="false">Science</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-ai-tab" data-bs-toggle="pill" data-bs-target="#pills-ai" type="button" role="tab" aria-controls="pills-ai" aria-selected="false">AI</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-travel-tab" data-bs-toggle="pill" data-bs-target="#pills-travel" type="button" role="tab" aria-controls="pills-travel" aria-selected="false">Travel</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-health-tab" data-bs-toggle="pill" data-bs-target="#pills-health" type="button" role="tab" aria-controls="pills-health" aria-selected="false">Health</button>
+        </li>
+
+
+
+        {% if cat_menu %}
+
+        <li class="nav-item dropdown mx-4">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Category
+          </a>
+          <ul class="dropdown-menu">
+            {% for item in cat_menu %}
+            <li><a class="dropdown-item" href="{% url 'category' item|slugify %}">{{item}}</a></li>
+            {% endfor %}
+            
+          </ul>
+        </li>
+        {% else %}
+        
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'category_list' %}">categories</a>
+        </li>
+        
+        {% endif %}
+      </ul>
+      <!-- All section -->
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab" tabindex="0">
+          <div class="container mt-4">
+            <div class="row">
+                {% for post in object_list %}
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    
+                  <div class="port-Image">
+                      <div>
+                        <a href="{% url 'detail' post.pk %}">
+                        <div class="myblog">
+                            {% if post.image %}
+                          <div class="img-portfolio">
+                            <img src="{{ post.image.url }}" class="rounded-4" alt="port1">
+                            <div class="mask"></div>
+    
+                            <a href="#"></a>
+                            
+                          </div>
+                          {% endif %}
+                         
+                          <h4 class="name">{{ post.category }}</h4>
+                       
+                        </div></a>
+    
+                         
+                        <div class="post-info">
+                          <div class="post-date">{{ post.created_at|timesince }} ago</div>
+                          <a href="{% url 'detail'  post.pk %}"><h4 class="blog-item-title">{{ post.title }}</h4></a>
+                          <a href="{% url 'detail'  post.pk %}">
+                            <p class="blog-item-title">{{ post.intro|safe|truncatechars:200 }}</p></a>
+                      </div>
+                      </div>
+                   
+                  </div>
+                 
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        </div>
+            
+        <div class="tab-pane fade" id="pills-Programming" role="tabpanel" aria-labelledby="pills-Programming-tab" tabindex="0">
+
+          <div class="container mt-4">
+            <div class="row">
+                <!-- {% for post in object_list %} -->
+                {% if post.category == 'programming' %}
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    
+                  <div class="port-Image">
+                      <div>
+                        <a href="{% url 'detail' post.pk %}">
+                        <div class="myblog">
+                            {% if post.image %}
+                          <div class="img-portfolio">
+                            <img src="{{ post.image.url }}" class="rounded-4" alt="port1">
+                            <div class="mask"></div>
+    
+                            <a href="#"></a>
+                            
+                          </div>
+                          
+                          {% endif %}
+                         
+                          <h4 class="name">{{ post.category }}</h4>
+                       
+                        </div></a>
+    
+                         
+                        <div class="post-info">
+                          <div class="post-date">{{ post.created_at|timesince }} ago</div>
+                          <a href="{% url 'detail'  post.pk %}"><h4 class="blog-item-title">{{ post.title }}</h4></a>
+                          <a href="{% url 'detail'  post.pk %}">
+                            <p class="blog-item-title">{{ post.intro|safe|truncatechars:200 }}</p></a>
+                      </div>
+                      </div>
+                   
+                  </div>
+                 
+                </div>
+              
+                {% endif %}
+                <!-- {% endfor %} -->
+            </div>
+         
+        </div>
+          
+        </div>
+        <div class="tab-pane fade" id="pills-science" role="tabpanel" aria-labelledby="pills-science-tab" tabindex="0">
+          
+          <div class="container mt-4">
+            <div class="row">
+                <!-- {% for post in object_list %} -->
+                {% if post.category == 'Science' %}
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    
+                  <div class="port-Image">
+                      <div>
+                        <a href="{% url 'detail' post.pk %}">
+                        <div class="myblog">
+                            {% if post.image %}
+                          <div class="img-portfolio">
+                            <img src="{{ post.image.url }}" class="rounded-4" alt="port1">
+                            <div class="mask"></div>
+    
+                            <a href="#"></a>
+                            
+                          </div>
+                          
+                          {% endif %}
+                         
+                          <h4 class="name">{{ post.category }}</h4>
+                       
+                        </div></a>
+    
+                         
+                        <div class="post-info">
+                          <div class="post-date">{{ post.created_at|timesince }} ago</div>
+                          <a href="{% url 'detail'  post.pk %}"><h4 class="blog-item-title">{{ post.title }}</h4></a>
+                          <a href="{% url 'detail'  post.pk %}">
+                            <p class="blog-item-title">{{ post.intro|safe|truncatechars:200 }}</p></a>
+                      </div>
+                      </div>
+                   
+                  </div>
+                 
+                </div>
+              
+                {% endif %}
+                <!-- {% endfor %} -->
+            </div>
+         
+        </div>
+          
+        </div>
+        <div class="tab-pane fade" id="pills-ai" role="tabpanel" aria-labelledby="pills-ai-tab" tabindex="0">
+          
+          <div class="container mt-4">
+            <div class="row">
+                <!-- {% for post in object_list %} -->
+                {% if post.category == 'AI' %}
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    
+                  <div class="port-Image">
+                      <div>
+                        <a href="{% url 'detail' post.pk %}">
+                        <div class="myblog">
+                            {% if post.image %}
+                          <div class="img-portfolio">
+                            <img src="{{ post.image.url }}" class="rounded-4" alt="port1">
+                            <div class="mask"></div>
+    
+                            <a href="#"></a>
+                            
+                          </div>
+                          
+                          {% endif %}
+                         
+                          <h4 class="name">{{ post.category }}</h4>
+                       
+                        </div></a>
+    
+                         
+                        <div class="post-info">
+                          <div class="post-date">{{ post.created_at|timesince }} ago</div>
+                          <strong><a href="{% url 'detail'  post.pk %}"><h4 class="blog-item-title">{{ post.title }}</h4></a></strong>
+                          <a href="{% url 'detail'  post.pk %}">
+                            <p class="blog-item-title">{{ post.intro|safe|truncatechars:200 }}</p></a>
+                      </div>
+                      </div>
+                   
+                  </div>
+                 
+                </div>
+              
+                {% endif %}
+                <!-- {% endfor %} -->
+            </div>
+         
+        </div>
+          
+        </div>
+        <div class="tab-pane fade" id="pills-travel" role="tabpanel" aria-labelledby="pills-travel-tab" tabindex="0">
+          
+          <div class="container mt-4">
+            <div class="row">
+                <!-- {% for post in object_list %} -->
+                {% if post.category == 'Travel' %}
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    
+                  <div class="port-Image">
+                      <div>
+                        <a href="{% url 'detail' post.pk %}">
+                        <div class="myblog">
+                            {% if post.image %}
+                          <div class="img-portfolio">
+                            <img src="{{ post.image.url }}" class="rounded-4" alt="port1">
+                            <div class="mask"></div>
+    
+                            <a href="#"></a>
+                            
+                          </div>
+                          
+                          {% endif %}
+                         
+                          <h4 class="name">{{ post.category }}</h4>
+                       
+                        </div></a>
+    
+                         
+                        <div class="post-info">
+                          <div class="post-date">{{ post.created_at|timesince }} ago</div>
+                          <a href="{% url 'detail'  post.pk %}"><h4 class="blog-item-title">{{ post.title }}</h4></a>
+                          <a href="{% url 'detail'  post.pk %}">
+                            <p class="blog-item-title">{{ post.intro|safe|truncatechars:200 }}</p></a>
+                      </div>
+                      </div>
+                   
+                  </div>
+                 
+                </div>
+              
+                {% endif %}
+                <!-- {% endfor %} -->
+            </div>
+         
+        </div>
+          
+        </div>
+        <div class="tab-pane fade" id="pills-health" role="tabpanel" aria-labelledby="pills-health-tab" tabindex="0">
+          
+          <div class="container mt-4">
+            <div class="row">
+                <!-- {% for post in object_list %} -->
+                {% if post.category == 'Health' %}
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    
+                  <div class="port-Image">
+                      <div>
+                        <a href="{% url 'detail' post.pk %}">
+                        <div class="myblog">
+                            {% if post.image %}
+                          <div class="img-portfolio">
+                            <img src="{{ post.image.url }}" class="rounded-4" alt="port1">
+                            <div class="mask"></div>
+    
+                            <a href="#"></a>
+                            
+                          </div>
+                          
+                          {% endif %}
+                         
+                          <h4 class="name">{{ post.category }}</h4>
+                       
+                        </div></a>
+    
+                         
+                        <div class="post-info">
+                          <div class="post-date">{{ post.created_at|timesince }} ago</div>
+                          <a href="{% url 'detail'  post.pk %}"><h4 class="blog-item-title">{{ post.title }}</h4></a>
+                          <a href="{% url 'detail'  post.pk %}">
+                            <p class="blog-item-title">{{ post.intro|safe|truncatechars:200 }}</p></a>
+                      </div>
+                      </div>
+                   
+                  </div>
+                 
+                </div>
+              
+                {% endif %}
+                <!-- {% endfor %} -->
+            </div>
+         
+        </div>
+          
+        </div>
+
+      </div>
+</div>
+
+
+{% endblock %}

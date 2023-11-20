@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Edit profile {% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+<h1 class="text-center text-success">Edit your profile</h1>
+<div class="form-group">
+<p>{{user.profile.bio}}</p>
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-secondary">Edit</button>
+</form>
+</div>
+{% else %}
+<p>You are not allow here</p>
+{% endif %}
+{% endblock %}

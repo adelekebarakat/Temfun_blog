@@ -1,0 +1,87 @@
+{% extends './base.html' %}
+{% load static %}
+{% block title %} {{post.title_tag}} {% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+<h1>{{post.title}}</h1>
+
+<small>By: {{post.owner.first_name}} {{post.owner.last_name}} - </small>
+<small>{{post.created_at| timesince}} ago</small><br>
+
+
+{% if post.image %}
+<figure class="detail-blog" class="mb-6">
+    <img src="{{ post.image.url }}" alt="" class="mb-6" >
+     </figure>
+     {% endif %}
+<p>{{post.intro|safe}}</p>
+<p>{{post.slug}}</p>
+{{post.body|safe}}
+<a href="{% url 'home' %}" class="btn btn-secondary">Go Back</a>
+{% if post.owner == user %}
+<a href="{% url 'update_blog' post.pk %}" class="btn btn-secondary">Edit</a>
+<a href="{% url 'delete_blog' post.pk %}" class="btn btn-secondary">Delete</a>
+{% endif %}
+
+<br><br>
+<div class="card mb-3">
+    <div class="row g-0">
+      <div class="col-md-2">
+
+        {% if post.owner.profile.profile_pic.url %}
+        <img src="{{post.owner.profile.profile_pic.url}}" class="img-fluid rounded-start" alt="profile_pic" >
+        {% else %}
+        <img src="{% static 'image/profile.jpg' %}" alt="">
+        {% endif %}
+      </div>
+      <div class="col-md-10">
+        <div class="card-body">
+          <h5 class="card-title">{{post.owner.first_name}} {{post.owner.last_name}}</h5>
+          <p class="small text-muted">
+            <!-- {% if post.owner.profile %} -->
+            <a href="{% url 'profile_page' post.owner.profile.id %}">Profile pages | </a> 
+            <!-- {% endif %} -->
+            {% if post.owner.profile.website_url %}
+            <a href="{{post.owner.profile.website_url}}">Website | </a> 
+            {% endif %}
+
+            {% if post.owner.profile.facebook_url %}
+            <a href="{{post.owner.profile.facebook_url}}">Facebook |  </a> 
+            {% endif %}
+
+            {% if post.owner.profile.instagram_url %}
+            <a href="{{post.owner.profile.instagram_url}}"> Instagram |  </a> 
+            {% endif %}
+            {% if post.owner.profile.pinterest_url %}
+            <a href="{{post.owner.profile.pinterest_url}}">Pinterest </a> 
+            {% endif %}
+        </p>
+          <p class="card-text">{{post.owner.profile.bio}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<h3>Comment</h3>
+{% if not post.comments.all %}
+<p>
+  No comment yet... <a href="{% url 'comment' post.pk %}">You can add comment</a>
+</p>
+{% else %}
+{% for comment in post.comments.all %}
+<strong>
+  {{ comment.name }} - {{ comment.created_at }}
+</strong>
+<p>
+  {{ comment.body }}
+</p>
+
+{% endfor %}
+
+{% endif %}
+<a href="{% url 'comment' post.pk %}">Add comment</a>
+{% endblock %}

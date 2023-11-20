@@ -1,0 +1,27 @@
+{% extends './base.html' %}
+
+{% block title %}category {% endblock %}
+
+
+{% block content %}
+{% if category_post %}
+<h1>{{cats}}</h1><br>
+{% for post in category_post %}
+
+<p> <a href="{% url 'detail' post.pk %}">{{post.title}}</a></p> 
+
+<small>{{post.owner.first_name}} {{post.owner.last_name}} </small>
+{% if post.image %}
+<img src="{{post.image.url}}" alt="">
+{% endif %}
+<small>{{post.created_at| timesince}} ago</small><br>
+{{post.intro|safe}}
+
+{% endfor %}
+{% else %}
+<br>
+<h1>Opps.. This page does not exist</h1>
+{% endif %}
+
+{% endblock %}
+

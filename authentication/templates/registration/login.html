@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+
+{% block title %} login {% endblock %}
+
+
+{% block content %}
+
+<h1 class="text-center text-success">Login</h1>
+<div class="form-group">
+<form method="post">
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Username</label>
+        <input type="texr" class="form-control" id="exampleFormControlInput1" name="username">
+      </div>
+      <div class="mb-3">
+        <label for="inputPassword" class="form-label">Password</label>
+        
+          <input type="password" class="form-control" id="inputPassword" name="password">
+        
+      </div>
+      Not a member? <a href="{% url 'register' %}">Signup</a><br><br>
+    <button type="submit" class="btn btn-secondary">Sign Up</button>
+</form>
+    Forgot your password <a href="{%url 'password-reset'%}">Reset Password</a>
+
+</div>
+
+{% endblock %}
