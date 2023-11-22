@@ -98,6 +98,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# postgres://worldexploredb_user:M4kWGu1mmsUle3tfNh9cQ0991Zn9sreA@dpg-cldn1t3mot1c73dqpjtg-a.oregon-postgres.render.com/worldexploredb
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
