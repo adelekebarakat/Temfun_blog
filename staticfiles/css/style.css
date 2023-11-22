@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Philosopher&family=Poppins:wght@300;500;600;700;900&display=swap');
 
 
-a{
+.port-Image a{
     color: black;
     text-decoration: none;
 }
@@ -22,7 +22,7 @@ h1,h2,h3,h4,h5,h6 {
   font-size: 55px;
 }
 p {
-    font-family: 'Philosopher', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 20px;
     font-weight: 300;
 
@@ -49,87 +49,6 @@ p {
     border-color: #85D52D;
     border: 2px;
 }
-.mycard {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* width: 320px; */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    /* padding: 20px; */
-    overflow: hidden;
-    border-radius: 10px;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
-  }
-  
-  .content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    /* gap: 20px; */
-    color: #000000;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
-    padding: 10px;
-  }
-  
-  .content .heading {
-    font-weight: 700;
-    font-size: 28px;
-  }
-  
-  .content .para {
-    line-height: 1.5;
-  }
-
- 
-  
-  .content .btn {
-    color: #e8e8e8;
-    text-decoration: none;
-    padding: 10px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    background: linear-gradient(-45deg, #FFC107 0%, #85D52D 100% );
-    border-radius: 5px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .mycard::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 5px;
-    background: linear-gradient(-45deg, #FFC107 0%, #85D52D 100% );
-    z-index: -1;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
-  }
-  
-  .mycard:hover::before {
-    height: 100%;
-  }
-  
-  .mycard:hover {
-    box-shadow: none;
-  }
-  
-  .mycard:hover .btn {
-    color: #212121;
-    background: #e8e8e8;
-  }
-  
-  .content .btn:hover {
-    outline: 2px solid #e8e8e8;
-    background: transparent;
-    color: #e8e8e8;
-  }
-  
-  .content .btn:active {
-    box-shadow: none;
-  }
   
 .img-blog{
     position: relative;
