@@ -88,7 +88,7 @@ def search(request):
 class AddCategory(CreateView):
     model = Category
     template_name = 'core/addcategory.html'
-    fields = ['name']
+    fields = ['title_cat']
 
 
 class Updateblog(UpdateView):

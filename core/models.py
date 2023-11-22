@@ -13,10 +13,10 @@ User = get_user_model()
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=225)
+    title_cat = models.CharField(max_length=225, null=True, blank=True)
 
     class Meta:
-        ordering = ('name',)
+        ordering = ('title_cat',)
         verbose_name_plural = 'Categories'
     
 

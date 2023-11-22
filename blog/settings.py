@@ -19,6 +19,7 @@ from decouple import config
 
 
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 # environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
@@ -92,25 +93,18 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-# postgres://worldexploredb_user:M4kWGu1mmsUle3tfNh9cQ0991Zn9sreA@dpg-cldn1t3mot1c73dqpjtg-a.oregon-postgres.render.com/worldexploredb
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'worldexploredb',
-#         'USER': 'worldexploredb_user',
-#         'PASSWORD': 'M4kWGu1mmsUle3tfNh9cQ0991Zn9sreA',
-#         'HOST': 'dpg-cldn1t3mot1c73dqpjtg-a.oregon-postgres.render.com',
-#         'PORT': '5432',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+import dj_database_url
+
+DATABASES = {
+    'default': dj_database_url.parse(config('DATABASE_URL'))
+}
 
 
 # Password validation
