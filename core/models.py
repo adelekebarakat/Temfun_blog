@@ -3,19 +3,17 @@ from django.contrib.auth import get_user_model
 
 from django.urls import reverse
 from ckeditor.fields import RichTextField
-from django.contrib.auth.models import User
 
 
 
 
 
 # Create your models here.
+User = get_user_model()
 
 
-
-class core_category(models.Model):
+class Category(models.Model):
     title_cat = models.CharField(max_length=225, null=True, blank=True)
-    # core_category = models.CharField(max_length=225, null=True, blank=True)
 
     class Meta:
         ordering = ('title_cat',)
@@ -36,8 +34,7 @@ class Post(models.Model):
     title = models.CharField(max_length=225)
     title_tag = models.CharField(max_length=225)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    # category = models.CharField(max_length = 225, default = 'coding')
-    category = models.ForeignKey(core_category, on_delete=models.CASCADE)
+    category = models.CharField(max_length = 225, default = 'coding')
     intro = models.TextField()
     body = RichTextField()
     created_at = models.DateTimeField(auto_now_add=True) 

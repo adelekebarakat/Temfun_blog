@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, core_category, Comment
-from .forms1 import PostForm, EditForm, CommentForm
+from .models import Post, Category, Comment
+from .forms import PostForm, EditForm, CommentForm
 from django.urls import reverse_lazy
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
@@ -23,7 +23,7 @@ def CategoryView(request, cats):
 
 
 def CategoryViewList(request):
-    cat_menu_list = core_category.objects.all()
+    cat_menu_list = Category.objects.all()
     context ={
         'cat_menu_list': cat_menu_list,
 
@@ -39,22 +39,22 @@ class Home(ListView):
     model = Post
     template_name = 'core/index.html'
 
-    # def get_context_data(self, *arg, **kwargs):
-    #     cat_menu = core_category.objects.all()
-    #     context  = super(Home, self).get_context_data(*arg, **kwargs)
-    #     context["cat_menu"] = cat_menu
-    #     return context
+    def get_context_data(self, *arg, **kwargs):
+        cat_menu = Category.objects.all()
+        context  = super(Home, self).get_context_data(*arg, **kwargs)
+        context["cat_menu"] = cat_menu
+        return context
 
 class Detail(DetailView):
     model = Post
     template_name = 'core/detail.html'
 
 
-    # def get_context_data(self, *arg, **kwargs):
-    #     cat_menu = core_category.objects.all()
-    #     context  = super(Detail, self).get_context_data(*arg, **kwargs)
-    #     context["cat_menu"] = cat_menu
-    #     return context
+    def get_context_data(self, *arg, **kwargs):
+        cat_menu = Category.objects.all()
+        context  = super(Detail, self).get_context_data(*arg, **kwargs)
+        context["cat_menu"] = cat_menu
+        return context
     
 
 
@@ -67,11 +67,11 @@ class Createblog(CreateView):
         form.instance.owner = self.request.user
         return super().form_valid(form)
 
-    # def get_context_data(self, *arg, **kwargs):
-    #     cat_menu = core_category.objects.all()
-    #     context  = super(Createblog, self).get_context_data(*arg, **kwargs)
-    #     context["cat_menu"] = cat_menu
-    #     return context
+    def get_context_data(self, *arg, **kwargs):
+        cat_menu = Category.objects.all()
+        context  = super(Createblog, self).get_context_data(*arg, **kwargs)
+        context["cat_menu"] = cat_menu
+        return context
 
     
 
@@ -86,7 +86,7 @@ def search(request):
 
 
 class AddCategory(CreateView):
-    model = core_category
+    model = Category
     template_name = 'core/addcategory.html'
     fields = ['title_cat']
 
