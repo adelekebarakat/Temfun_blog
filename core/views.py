@@ -39,22 +39,22 @@ class Home(ListView):
     model = Post
     template_name = 'core/index.html'
 
-    def get_context_data(self, *arg, **kwargs):
-        cat_menu = core_category.objects.all()
-        context  = super(Home, self).get_context_data(*arg, **kwargs)
-        context["cat_menu"] = cat_menu
-        return context
+    # def get_context_data(self, *arg, **kwargs):
+    #     cat_menu = core_category.objects.all()
+    #     context  = super(Home, self).get_context_data(*arg, **kwargs)
+    #     context["cat_menu"] = cat_menu
+    #     return context
 
 class Detail(DetailView):
     model = Post
     template_name = 'core/detail.html'
 
 
-    def get_context_data(self, *arg, **kwargs):
-        cat_menu = core_category.objects.all()
-        context  = super(Detail, self).get_context_data(*arg, **kwargs)
-        context["cat_menu"] = cat_menu
-        return context
+    # def get_context_data(self, *arg, **kwargs):
+    #     cat_menu = core_category.objects.all()
+    #     context  = super(Detail, self).get_context_data(*arg, **kwargs)
+    #     context["cat_menu"] = cat_menu
+    #     return context
     
 
 
@@ -67,11 +67,11 @@ class Createblog(CreateView):
         form.instance.owner = self.request.user
         return super().form_valid(form)
 
-    def get_context_data(self, *arg, **kwargs):
-        cat_menu = core_category.objects.all()
-        context  = super(Createblog, self).get_context_data(*arg, **kwargs)
-        context["cat_menu"] = cat_menu
-        return context
+    # def get_context_data(self, *arg, **kwargs):
+    #     cat_menu = core_category.objects.all()
+    #     context  = super(Createblog, self).get_context_data(*arg, **kwargs)
+    #     context["cat_menu"] = cat_menu
+    #     return context
 
     
 
