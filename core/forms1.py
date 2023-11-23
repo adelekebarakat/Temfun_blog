@@ -1,15 +1,13 @@
 from django import forms
-from .models import Post, Category, Comment
+from .models import Post, core_category, Comment
 
 
 
 
 
-choices = Category.objects.all().values_list('pk', 'title_cat')
-if choices:
-    choice_list =  [('','')]
-    for item in choices:
-        choice_list.append(item)
+# choices = core_category.objects.all().values_list('pk', 'title_cat')
+# choices = Category.objects.all().values_list('name', 'name')
+# choice_list = list(choices)
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -19,7 +17,7 @@ class PostForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control',}),
             'title_tag': forms.TextInput(attrs={'class': 'form-control',}),
-            'category': forms.Select(choices=choice_list, attrs={'class': 'form-control',}),
+           
             'intro': forms.Textarea(attrs={'class': 'form-control',}),
             'body': forms.Textarea(attrs={'class': 'form-control', }),
             
@@ -34,7 +32,7 @@ class EditForm(forms.ModelForm):
             'title_tag': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Title_tag of blog'}),
             'intro': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Write a short description of your oblog'}),
             'body': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'write the content of your blog here'}),
-            'category': forms.Select(choices=choice_list, attrs={'class': 'form-control',}),
+            # 'category': forms.Select(choices=choice_list, attrs={'class': 'form-control',}),
             
         }
 
